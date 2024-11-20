@@ -76,10 +76,51 @@ section {
   z-index: 1;
 }
 
-.video-container video,
-section img {
-  max-width: 100%;
-  height: auto;
+.video-container {
+  position: relative;
+  display: inline-block;
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.7),
+    0 0 30px rgba(255, 182, 193, 0.5);
+  border-radius: 15px;
+  overflow: hidden;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(255, 182, 193, 0.9);
+  }
+}
+
+.video-message {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #2d3748;
+  font-style: italic;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+.floating-text {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1,2rem;
+  color: #ff69b4;
+  font-style: italic;
+  animation: float 5s infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(-50%, -10px);
+  }
+  50% {
+    transform: translate(-50%, 10px);
+  }
 }
 
 #backButton {
