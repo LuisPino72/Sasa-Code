@@ -4,54 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SaSa</title>
-    <link rel="stylesheet" href="style.css" />
+    <link href="styles.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <!-- Botón de regreso -->
-    <button id="backButton" class="back-button hidden" onclick="goBack()">
-      ⬅
-    </button>
+    <button id="backButton" class="hidden" onclick="goBack()">⬅</button>
 
     <!-- Pantalla 1: Bienvenida -->
-    <section id="PantallaBienvenida" class="Bienvenida-container">
-      <img src="assets/Fondo.png" class="Bienvenida-image" />
-      <h1 class="Bienvenida-title">Bienvenida, Sarais</h1>
-      <p class="Bienvenida-description">
-        Espero disfrutes lo que vas a ver, esta es la verdadera razón de porque
-        estuve un poco raro estos últimos días (No me odies JAJAJA😜).
-      </p>
-      <button class="continue-button" onclick="goToSpecialMoment()">
-        Continuar
-      </button>
+    <section id="PantallaBienvenida">
+      <div id="threejs-canvas-container"></div>
+      <!-- Aquí se mostrará el lienzo de Three.js -->
+      <div class="content">
+        <h1>Bienvenida, Sarais</h1>
+        <p>
+          Espero disfrutes lo que vas a ver, esta es la verdadera razón de
+          porque estuve un poco raro estos últimos días (No me odies JAJAJA😜).
+        </p>
+        <button class="btn" onclick="goToSpecialMoment()">Continuar</button>
+      </div>
     </section>
 
-    <section id="PantallaVideo" class="Pantalla-container hidden">
-      <h1 class="title">Video</h1>
-      <div class="video-wrapper">
-        <video
-          src="assets/Sasa avatar video.mp4"
-          class="Pantalla-video"
-          controls
-          autoplay
-        >
+    <!-- Pantalla de video -->
+    <section id="PantallaVideo" class="hidden">
+      <h1>Video</h1>
+      <div class="video-container">
+        <video src="assets/Sasa avatar video.mp4" controls autoplay>
           Tu navegador no soporta la reproducción de videos.
         </video>
       </div>
-      <div class="button-wrapper">
-        <button class="next-button" onclick="goToPrincipal()">Continuar</button>
+      <div>
+        <button class="btn" onclick="goToPrincipal()">Continuar</button>
       </div>
     </section>
 
+    <!-- Pantalla principal -->
     <section id="Principal" class="hidden">
-      <img
-        src="assets/Fondo.png"
-        alt="Romantic Beach Dinner Setup"
-        class="dinner-image"
-      />
-      <h1 class="Principal-text">¿Quieres ser mi novia?</h1>
-      <div>
-        <button class="Si-button">Sí</button>
-        <button class="No-button">No</button>
+      <img src="assets/Fondo.png" alt="Romantic Beach Dinner Setup" />
+      <h1>¿Quieres ser mi novia?</h1>
+      <div class="button-group">
+        <button class="btn-yes">Sí</button>
+        <button class="btn-no">No</button>
       </div>
     </section>
 

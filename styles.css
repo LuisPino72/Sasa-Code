@@ -1,0 +1,162 @@
+/* Establecer el estilo base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fondo y color de texto por defecto */
+body {
+  color: #2d3748; /* text-gray-800 */
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}
+
+.text-center {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Ajuste de Three.js */
+#threejs-canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Asegura que el canvas se mantenga detrás de otros elementos */
+}
+
+.content {
+  z-index: 1;
+  text-align: center;
+  position: relative;
+  padding: 20px;
+  max-width: 90%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.7); /* Fondo translúcido */
+  border-radius: 10px;
+}
+
+/* Estilos para las secciones */
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.video-container video,
+section img {
+  max-width: 100%;
+  height: auto;
+}
+
+#backButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 10px;
+  font-size: 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 2;
+}
+
+#backButton:hover {
+  background-color: #0056b3;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-yes {
+  background-color: #28a745;
+}
+
+.btn-yes:hover {
+  background-color: #218838;
+}
+
+.btn-no {
+  background-color: #dc3545;
+}
+
+.btn-no:hover {
+  background-color: #c82333;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  p,
+  button {
+    font-size: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .video-container video {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  p,
+  button {
+    font-size: 0.875rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .video-container video {
+    width: 100%;
+  }
+}
