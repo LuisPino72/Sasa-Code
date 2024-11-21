@@ -6,59 +6,75 @@
 }
 
 /* Fondo y color de texto por defecto */
-/* Fondo y color de texto por defecto */
 body {
-  color: #b51ed3; /* text-gray-800 */
+  color: #b51ed3; /* Texto color rosa fuerte */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0;
   position: relative;
+  background: linear-gradient(to bottom, #ffe6f2, #ffffff);
 }
-/* Fuentes Pinyon Script, Sacramento, Amatic SC, Pacifico, Dancing Script, Lobster, Great Vibes */
 
-/* Pinyon Script */
+/* Fuentes personalizadas */
 h1 {
   font-family: "Great Vibes", cursive;
   font-size: 5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  color: #b51ed3;
 }
 
-/* Great Vibes */
 h2 {
   font-family: "Sacramento", cursive;
   font-size: 3rem;
 }
 
-/* Lobster */
 h3 {
   font-family: "Lobster", cursive;
 }
 
-/* Dancing Script */
 p {
   font-family: "Dancing Script", cursive;
-  font-size: 3rem;
+  font-size: 2rem;
+  color: #4a154b;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Pacifico */
+/* Botón de regreso */
+#backButton {
+  position: absolute;
+  top: 1px;
+  left: -5px;
+  padding: 5px;
+  font-size: 1rem;
+  background-color: transparent; /* Cambiado a transparente */
+  color: #007bff; /* Mantenemos el azul para el texto */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  z-index: 2;
+}
+
+/* Botón de música */
+.toggle-music-button {
+  position: absolute;
+  top: -5px;
+  right: -15px;
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: #ffffff;
+  z-index: 10;
+}
+
+/* Botones de continuar */
 button {
   font-family: "Pacifico", cursive;
-}
-
-.hidden {
-  display: none;
-}
-
-.text-center {
-  text-align: center;
-  margin-top: 20px;
-}
-
-button {
   padding: 10px 20px;
   font-size: 1rem;
-  background-color: #007bff;
+  background-color: #007bff; /* Fondo azul */
   color: white;
   border: none;
   border-radius: 5px;
@@ -66,11 +82,8 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
 
-/* Ajuste de Three.js */
+/* Estilos para Three.js */
 #threejs-canvas-container {
   position: absolute;
   top: 0;
@@ -91,7 +104,7 @@ button:hover {
   border-radius: 10px;
 }
 
-/* Estilos para las secciones */
+/* Secciones */
 section {
   display: flex;
   flex-direction: column;
@@ -102,88 +115,13 @@ section {
   padding: 20px;
   box-sizing: border-box;
   position: relative;
-  z-index: 1;
 }
 
-.video-container {
-  position: relative;
-  display: inline-block;
-  box-shadow: 0 0 20px rgba(255, 105, 180, 0.702),
-    0 0 30px rgba(255, 182, 193, 0.5);
-  border-radius: 15px;
-  overflow: hidden;
-  animation: glow 2s infinite alternate;
+.hidden {
+  display: none;
 }
 
-@keyframes glow {
-  from {
-    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-  }
-  to {
-    box-shadow: 0 0 30px rgba(255, 182, 193, 0.9);
-  }
-}
-
-.video-message {
-  font-size: 4rem;
-  margin-bottom: 20px;
-  color: #b51ed3; /* Rosa fuerte para el texto secundario */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-  font-style: "Great Vibes";
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-}
-.floating-text {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 3rem;
-  color: #b51ed3; /* Texto blanco */
-  text-shadow: 2px 2px 4px white;
-  font-style: italic;
-  animation: float 5s infinite;
-}
-
-/* Fondo para la pantalla de video */
-.video-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to top,
-    rgba(255, 105, 180, 0.5),
-    white
-  ); /* Rosa suave a blanco */
-  z-index: -1;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translate(-50%, -10px);
-  }
-  50% {
-    transform: translate(-50%, 10px);
-  }
-}
-
-#PantallaVideo {
-  animation: fadeIn 1.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
+/* Pantalla de bienvenida */
 #PantallaBienvenida {
   animation: fadeIn 1.5s ease-in-out;
 }
@@ -199,67 +137,95 @@ section {
   }
 }
 
+/* Pantalla de video */
+#PantallaVideo {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.video-container {
+  position: relative;
+  display: inline-block;
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.7),
+    0 0 30px rgba(255, 182, 193, 0.5);
+  border-radius: 15px;
+  overflow: hidden;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(255, 182, 193, 0.9);
+  }
+}
+
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(255, 105, 180, 0.5), white);
+  z-index: -1;
+}
+
+.video-message {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  color: #b51ed3;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.floating-text {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  color: #b51ed3;
+  text-shadow: 2px 2px 4px white;
+  animation: float 5s infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(-50%, -10px);
+  }
+  50% {
+    transform: translate(-50%, 10px);
+  }
+}
+
+/* Pantalla principal */
 #Principal {
   animation: fadeIn 1.5s ease-in-out;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-#backButton {
-  position: absolute;
-  top: 10px;
-  left: 5px;
-  padding: 5px;
-  font-size: 1rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  z-index: 2;
-}
-
-#backButton:hover {
-  background-color: #0056b3;
+#Principal img {
+  max-width: 100%;
+  border-radius: 10px;
 }
 
 .button-group {
   display: flex;
   gap: 10px;
 }
-/* Estilo para el botón de pausar/reanudar música */
-.toggle-music-button {
-  position: absolute;
-  top: -5px;
-  right: -15px;
-  background-color: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #ffffff;
-  z-index: 10;
-}
 
 .btn-yes {
-  background-color: #0056b3;
+  background-color: #28a745;
+  color: white;
 }
 
 .btn-yes:hover {
-  background-color: #b9c8d8;
+  background-color: #218838;
 }
 
 .btn-no {
   background-color: #dc3545;
+  color: white;
 }
 
 .btn-no:hover {
@@ -269,16 +235,15 @@ section {
 /* Estilos responsivos */
 @media (max-width: 768px) {
   h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
-  p,
+  p {
+    font-size: 1.5rem;
+  }
+
   button {
-    font-size: 2rem;
-  }
-
-  .btn {
-    width: 100%;
+    font-size: 1.2rem;
   }
 
   .video-container video {
@@ -288,11 +253,11 @@ section {
 
 @media (max-width: 480px) {
   h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   p {
-    font-size: 2.2rem;
+    font-size: 1.2rem;
   }
 
   button {

@@ -19,7 +19,7 @@
   <body>
     <audio id="backgroundMusic" loop>
       <source
-        src="assets/SaSa, mi pequeña niña complicada v1.mp3"
+        src="assets/SaSa_mi_pequeña_niña_complicada_v1.mp3"
         type="audio/mp3"
       />
       Tu navegador no soporta el elemento de audio.
@@ -45,7 +45,6 @@
     </section>
 
     <!-- Pantalla de video -->
-    <!-- Pantalla de video -->
     <section id="PantallaVideo" class="hidden">
       <div class="video-background"></div>
       <h1 class="video-message">"Un pequeño viaje a nuestras Historia."</h1>
@@ -54,7 +53,7 @@
       <div class="video-container">
         <video
           id="backgroundVideo"
-          src="assets/Nuestra Historia.mp4"
+          src="assets/Nuestra_Historia.mp4"
           controls
           autoplay
         >
@@ -68,11 +67,19 @@
 
     <!-- Pantalla principal -->
     <section id="Principal" class="hidden">
-      <img src="assets/Fondo.png" alt="Romantic Beach Dinner Setup" />
-      <h1>¿Quieres ser mi novia?</h1>
-      <div class="button-group">
-        <button class="btn-yes">Sí</button>
-        <button class="btn-no">No</button>
+      <div class="romantic-container">
+        <img
+          src="assets/Fondo.png"
+          alt="Fotos romanticas"
+          class="background-image"
+        />
+        <h1 class="proposal-text">¿Quieres ser mi novia?</h1>
+        <div class="button-group">
+          <button class="btn-yes" onclick="handleYes()">Sí</button>
+          <button class="btn-no" onclick="handleNo()">No</button>
+        </div>
+        <div id="confetti-container"></div>
+        <!-- Contenedor para animación -->
       </div>
     </section>
 

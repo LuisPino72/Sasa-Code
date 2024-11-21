@@ -4,6 +4,9 @@ let screenHistory = [];
 // Estado de la música (si está pausada o no)
 let isMusicPaused = false;
 
+// Referencia al elemento de música
+const backgroundMusic = document.getElementById("backgroundMusic");
+
 // Navegación entre pantallas
 function goToSpecialMoment() {
   addToHistory("PantallaBienvenida");
@@ -36,7 +39,9 @@ function showScreen(screenId) {
 
   if (screenId === "PantallaVideo") {
     // Si estamos en la pantalla de video, aseguramos que el video se reproduzca
-    videoElement.play();
+    videoElement.play().catch((error) => {
+      console.error("Error al reproducir el video:", error);
+    });
   } else {
     // Si estamos en otra pantalla, pausamos y restablecemos el video
     videoElement.pause();
@@ -59,26 +64,27 @@ function goBack() {
 
 // Función para manejar la reproducción de la música de fondo
 function handleBackgroundMusic(screenId) {
-  const backgroundMusic = document.getElementById("backgroundMusic");
   const videoScreen = "PantallaVideo";
 
   if (screenId === videoScreen) {
     backgroundMusic.pause(); // Pausa la música cuando el video está visible
   } else {
     if (!isMusicPaused) {
-      backgroundMusic.play(); // Reproduce la música si no está pausada
+      backgroundMusic.play().catch((error) => {
+        console.error("Error al reproducir música:", error);
+      });
     } else {
-      backgroundMusic.pause(); // Pausa la música si está pausada
+      backgroundMusic.pause();
     }
   }
 }
 
 // Función para alternar la música de fondo (pausar o reanudar)
 function toggleMusic() {
-  const backgroundMusic = document.getElementById("backgroundMusic");
-
   if (isMusicPaused) {
-    backgroundMusic.play();
+    backgroundMusic.play().catch((error) => {
+      console.error("Error al reanudar la música:", error);
+    });
     isMusicPaused = false;
   } else {
     backgroundMusic.pause();
@@ -90,13 +96,50 @@ function toggleMusic() {
 document.addEventListener("DOMContentLoaded", () => {
   showScreen("PantallaBienvenida");
   initThreeJS(); // Inicializa el lienzo 3D
-  document.getElementById("backgroundMusic").play(); // Reproduce la música al cargar
+
+  // Asegurar que el audio no se reproduce automáticamente
+  backgroundMusic.addEventListener("play", () => {
+    isMusicPaused = false;
+  });
+
+  backgroundMusic.addEventListener("pause", () => {
+    isMusicPaused = true;
+  });
 
   // Evento para alternar la música de fondo
   document
     .getElementById("toggleMusicButton")
     .addEventListener("click", toggleMusic);
 });
+
+// Configuración para la pantalla principal
+function handleYes() {
+  // Mostrar confeti
+  showConfetti();
+  alert("¡Sabía que dirías que sí! ❤️");
+}
+
+function handleNo() {
+  alert("¿Estás segura? Intenta de nuevo, sabes que dirás que sí 😜");
+}
+
+function showConfetti() {
+  const confettiContainer = document.getElementById("confetti-container");
+
+  // Generar partículas
+  for (let i = 0; i < 100; i++) {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = `${Math.random() * 100}%`;
+    confetti.style.animationDelay = `${Math.random()}s`;
+    confettiContainer.appendChild(confetti);
+  }
+
+  // Quitar confeti después de 5 segundos
+  setTimeout(() => {
+    confettiContainer.innerHTML = "";
+  }, 5000);
+}
 
 // Configuración de Three.js
 function initThreeJS() {
@@ -128,7 +171,7 @@ function initThreeJS() {
 
   // Texturas de las imágenes
   const loader = new THREE.TextureLoader();
-  const petalTexture = loader.load("assets/petalo.png");
+  const petalTexture = loader.load("assets/petalo.png"); // Cambié la ruta para las texturas
   const sunflowerTexture = loader.load("assets/girasol.png");
   const roseTexture = loader.load("assets/rosa.png");
 
