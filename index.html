@@ -17,8 +17,18 @@
   </head>
 
   <body>
+    <audio id="backgroundMusic" loop>
+      <source
+        src="assets/SaSa, mi pequeña niña complicada v1.mp3"
+        type="audio/mp3"
+      />
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+
     <!-- Botón de regreso -->
     <button id="backButton" class="hidden" onclick="goBack()">↩️</button>
+    <!-- Botón para pausar/reanudar la música de fondo -->
+    <button id="toggleMusicButton" class="toggle-music-button">🎵</button>
 
     <!-- Pantalla 1: Bienvenida -->
     <section id="PantallaBienvenida">
@@ -35,14 +45,19 @@
     </section>
 
     <!-- Pantalla de video -->
+    <!-- Pantalla de video -->
     <section id="PantallaVideo" class="hidden">
       <div class="video-background"></div>
-      <!-- Fondo -->
       <h1 class="video-message">"Un pequeño viaje a nuestras Historia."</h1>
       <h2 class="floating-text">"Juntos iremos a por más recuerdos únicos"</h2>
 
       <div class="video-container">
-        <video src="assets/Nuestra Historia.mp4" controls autoplay>
+        <video
+          id="backgroundVideo"
+          src="assets/Nuestra Historia.mp4"
+          controls
+          autoplay
+        >
           Tu navegador no soporta la reproducción de videos.
         </video>
       </div>

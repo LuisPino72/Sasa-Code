@@ -1,6 +1,9 @@
 // Historial de pantallas
 let screenHistory = [];
 
+// Estado de la música (si está pausada o no)
+let isMusicPaused = false;
+
 // Navegación entre pantallas
 function goToSpecialMoment() {
   addToHistory("PantallaBienvenida");
@@ -24,6 +27,21 @@ function showScreen(screenId) {
   // Mostrar/ocultar botón de regreso
   const backButton = document.getElementById("backButton");
   backButton.classList.toggle("hidden", screenId === "PantallaBienvenida");
+
+  // Manejar la reproducción de música
+  handleBackgroundMusic(screenId);
+
+  // Controlar la reproducción del video
+  const videoElement = document.getElementById("backgroundVideo");
+
+  if (screenId === "PantallaVideo") {
+    // Si estamos en la pantalla de video, aseguramos que el video se reproduzca
+    videoElement.play();
+  } else {
+    // Si estamos en otra pantalla, pausamos y restablecemos el video
+    videoElement.pause();
+    videoElement.currentTime = 0;
+  }
 }
 
 // Agregar pantalla al historial
@@ -39,10 +57,45 @@ function goBack() {
   }
 }
 
+// Función para manejar la reproducción de la música de fondo
+function handleBackgroundMusic(screenId) {
+  const backgroundMusic = document.getElementById("backgroundMusic");
+  const videoScreen = "PantallaVideo";
+
+  if (screenId === videoScreen) {
+    backgroundMusic.pause(); // Pausa la música cuando el video está visible
+  } else {
+    if (!isMusicPaused) {
+      backgroundMusic.play(); // Reproduce la música si no está pausada
+    } else {
+      backgroundMusic.pause(); // Pausa la música si está pausada
+    }
+  }
+}
+
+// Función para alternar la música de fondo (pausar o reanudar)
+function toggleMusic() {
+  const backgroundMusic = document.getElementById("backgroundMusic");
+
+  if (isMusicPaused) {
+    backgroundMusic.play();
+    isMusicPaused = false;
+  } else {
+    backgroundMusic.pause();
+    isMusicPaused = true;
+  }
+}
+
 // Inicialización al cargar
 document.addEventListener("DOMContentLoaded", () => {
   showScreen("PantallaBienvenida");
   initThreeJS(); // Inicializa el lienzo 3D
+  document.getElementById("backgroundMusic").play(); // Reproduce la música al cargar
+
+  // Evento para alternar la música de fondo
+  document
+    .getElementById("toggleMusicButton")
+    .addEventListener("click", toggleMusic);
 });
 
 // Configuración de Three.js
