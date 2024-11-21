@@ -38,12 +38,10 @@ function showScreen(screenId) {
   const videoElement = document.getElementById("backgroundVideo");
 
   if (screenId === "PantallaVideo") {
-    // Si estamos en la pantalla de video, aseguramos que el video se reproduzca
     videoElement.play().catch((error) => {
       console.error("Error al reproducir el video:", error);
     });
   } else {
-    // Si estamos en otra pantalla, pausamos y restablecemos el video
     videoElement.pause();
     videoElement.currentTime = 0;
   }
@@ -67,7 +65,7 @@ function handleBackgroundMusic(screenId) {
   const videoScreen = "PantallaVideo";
 
   if (screenId === videoScreen) {
-    backgroundMusic.pause(); // Pausa la música cuando el video está visible
+    backgroundMusic.pause();
   } else {
     if (!isMusicPaused) {
       backgroundMusic.play().catch((error) => {
@@ -95,9 +93,8 @@ function toggleMusic() {
 // Inicialización al cargar
 document.addEventListener("DOMContentLoaded", () => {
   showScreen("PantallaBienvenida");
-  initThreeJS(); // Inicializa el lienzo 3D
+  initThreeJS();
 
-  // Asegurar que el audio no se reproduce automáticamente
   backgroundMusic.addEventListener("play", () => {
     isMusicPaused = false;
   });
@@ -106,7 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
     isMusicPaused = true;
   });
 
-  // Evento para alternar la música de fondo
   document
     .getElementById("toggleMusicButton")
     .addEventListener("click", toggleMusic);
@@ -114,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Configuración para la pantalla principal
 function handleYes() {
-  // Mostrar confeti
   showConfetti();
   alert("¡Sabía que dirías que sí! ❤️");
 }
@@ -126,7 +121,6 @@ function handleNo() {
 function showConfetti() {
   const confettiContainer = document.getElementById("confetti-container");
 
-  // Generar partículas
   for (let i = 0; i < 100; i++) {
     const confetti = document.createElement("div");
     confetti.classList.add("confetti");
@@ -135,11 +129,118 @@ function showConfetti() {
     confettiContainer.appendChild(confetti);
   }
 
-  // Quitar confeti después de 5 segundos
   setTimeout(() => {
     confettiContainer.innerHTML = "";
   }, 5000);
 }
+
+// Función para cambiar la foto cada 3 segundos
+let photoContainers = document.querySelectorAll(".photo-container");
+photoContainers.forEach((container) => {
+  let images = container.querySelectorAll("img");
+  let currentIndex = 0;
+
+  // Cambiar foto cada 3 segundos
+  setInterval(() => {
+    images[currentIndex].style.display = "none";
+    currentIndex = (currentIndex + 1) % images.length;
+    images[currentIndex].style.display = "block";
+  }, 3000);
+});
+
+//Configuracion modal
+let selectedIndex = null; // Inicializarlo aquí globalmente
+
+// Configuración modal
+function openModal(index, containerId) {
+  console.log("Índice recibido:", index); // Verifica el índice recibido
+
+  const container = document.getElementById(containerId);
+  const photos = Array.from(container.querySelectorAll("img"));
+
+  // Asegúrate de que el índice esté dentro del rango válido
+  if (index >= 0 && index < photos.length) {
+    selectedIndex = index; // Asigna el índice al abrir el modal
+    const photo = photos[selectedIndex];
+    const imageSrc = photo.src;
+    const description = photo.alt;
+
+    let modal = document.getElementById("photoModal");
+
+    // Si ya existe un modal, lo eliminamos antes de crear uno nuevo
+    if (modal) {
+      modal.remove();
+    }
+
+    modal = document.createElement("div");
+    modal.id = "photoModal";
+    modal.innerHTML = `
+      <div id="photoModalContent">
+        <img src="${imageSrc}" alt="Foto" />
+        <div class="modal-description">${description}</div>
+        <div class="modal-buttons">
+          <button class="modal-button" onclick="prevPhoto('${containerId}')">←</button>
+          <button class="modal-button" onclick="nextPhoto('${containerId}')">→</button>
+        </div>
+        <button class="modal-close" onclick="closeModal()">Cerrar</button>
+      </div>
+    `;
+
+    // Añadir el modal al cuerpo del documento
+    document.body.appendChild(modal);
+
+    // Asegurarse de que el modal se muestre
+    modal.style.display = "block";
+  } else {
+    console.error("Foto no encontrada en el índice:", index);
+  }
+}
+
+// Función para mostrar foto anterior
+function prevPhoto(containerId) {
+  const container = document.getElementById(containerId);
+  const photos = Array.from(container.querySelectorAll("img"));
+
+  selectedIndex = selectedIndex === 0 ? photos.length - 1 : selectedIndex - 1;
+  const imageSrc = photos[selectedIndex].src;
+  const description = photos[selectedIndex].alt;
+
+  document.querySelector("#photoModalContent img").src = imageSrc;
+  document.querySelector(".modal-description").innerText = description;
+}
+
+// Función para mostrar foto siguiente
+function nextPhoto(containerId) {
+  const container = document.getElementById(containerId);
+  const photos = Array.from(container.querySelectorAll("img"));
+
+  selectedIndex = selectedIndex === photos.length - 1 ? 0 : selectedIndex + 1;
+  const imageSrc = photos[selectedIndex].src;
+  const description = photos[selectedIndex].alt;
+
+  document.querySelector("#photoModalContent img").src = imageSrc;
+  document.querySelector(".modal-description").innerText = description;
+}
+
+// Función para cerrar el modal
+function closeModal() {
+  let modal = document.getElementById("photoModal");
+  if (modal) {
+    modal.style.display = "none";
+    modal.remove(); // Elimina el modal del DOM
+  }
+}
+
+// Inicializar las fotos en cada contenedor
+document.querySelectorAll(".photo-container").forEach((container, index) => {
+  container.addEventListener("click", (e) => {
+    const images = Array.from(container.querySelectorAll("img"));
+    const clickedImageIndex = images.indexOf(e.target);
+    if (clickedImageIndex !== -1) {
+      openModal(clickedImageIndex, container.id);
+    }
+  });
+});
 
 // Configuración de Three.js
 function initThreeJS() {
