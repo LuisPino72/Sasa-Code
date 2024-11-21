@@ -8,7 +8,7 @@
 /* Fondo y color de texto por defecto */
 /* Fondo y color de texto por defecto */
 body {
-  color: #2d3748; /* text-gray-800 */
+  color: #b51ed3; /* text-gray-800 */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,7 +108,7 @@ section {
 .video-container {
   position: relative;
   display: inline-block;
-  box-shadow: 0 0 20px rgba(255, 105, 180, 0.7),
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.702),
     0 0 30px rgba(255, 182, 193, 0.5);
   border-radius: 15px;
   overflow: hidden;
@@ -125,9 +125,10 @@ section {
 }
 
 .video-message {
-  font-size: 5rem;
+  font-size: 4rem;
   margin-bottom: 20px;
-  color: #2d3748;
+  color: #b51ed3; /* Rosa fuerte para el texto secundario */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   font-style: "Great Vibes";
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
@@ -136,10 +137,26 @@ section {
   top: 50%;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 1, 2rem;
-  color: #ff69b4;
+  font-size: 3rem;
+  color: #b51ed3; /* Texto blanco */
+  text-shadow: 2px 2px 4px white;
   font-style: italic;
   animation: float 5s infinite;
+}
+
+/* Fondo para la pantalla de video */
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to top,
+    rgba(255, 105, 180, 0.5),
+    white
+  ); /* Rosa suave a blanco */
+  z-index: -1;
 }
 
 @keyframes float {
@@ -200,9 +217,9 @@ section {
 #backButton {
   position: absolute;
   top: 10px;
-  left: 10px;
-  padding: 10px;
-  font-size: 1.5rem;
+  left: 5px;
+  padding: 5px;
+  font-size: 1rem;
   background-color: #007bff;
   color: white;
   border: none;
@@ -222,11 +239,11 @@ section {
 }
 
 .btn-yes {
-  background-color: #28a745;
+  background-color: #0056b3;
 }
 
 .btn-yes:hover {
-  background-color: #218838;
+  background-color: #b9c8d8;
 }
 
 .btn-no {
@@ -245,7 +262,7 @@ section {
 
   p,
   button {
-    font-size: 1rem;
+    font-size: 2rem;
   }
 
   .btn {
@@ -259,12 +276,15 @@ section {
 
 @media (max-width: 480px) {
   h1 {
-    font-size: 1.5rem;
+    font-size: 2.2rem;
   }
 
-  p,
+  p {
+    font-size: 2.2rem;
+  }
+
   button {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 
   .btn {
