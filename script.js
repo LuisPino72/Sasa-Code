@@ -150,6 +150,7 @@ photoContainers.forEach((container) => {
 
 //Configuracion modal
 let selectedIndex = null; // Inicializarlo aquí globalmente
+let modalIsOpen = false; // Variable para controlar el estado del modal
 
 // Configuración modal
 function openModal(index, containerId) {
@@ -191,6 +192,8 @@ function openModal(index, containerId) {
 
     // Asegurarse de que el modal se muestre
     modal.style.display = "block";
+    modalIsOpen = true; // Modal abierto
+    updateBackButtonState(); // Desactiva el botón back
   } else {
     console.error("Foto no encontrada en el índice:", index);
   }
@@ -228,6 +231,18 @@ function closeModal() {
   if (modal) {
     modal.style.display = "none";
     modal.remove(); // Elimina el modal del DOM
+    modalIsOpen = false; // Modal cerrado
+    updateBackButtonState(); // Restaura el botón back
+  }
+}
+
+// Función para deshabilitar el botón back cuando el modal está abierto
+function updateBackButtonState() {
+  const backButton = document.getElementById("backButton");
+  if (modalIsOpen) {
+    backButton.disabled = true; // Desactiva el botón back
+  } else {
+    backButton.disabled = false; // Activa el botón back
   }
 }
 
