@@ -140,35 +140,32 @@ photoContainers.forEach((container) => {
   let images = container.querySelectorAll("img");
   let currentIndex = 0;
 
-  // Cambiar foto cada 3 segundos
+  // Cambiar foto cada 5 segundos
   setInterval(() => {
     images[currentIndex].style.display = "none";
     currentIndex = (currentIndex + 1) % images.length;
     images[currentIndex].style.display = "block";
-  }, 3000);
+  }, 5000);
 });
 
 //Configuracion modal
 let selectedIndex = null; // Inicializarlo aquí globalmente
 let modalIsOpen = false; // Variable para controlar el estado del modal
 
-// Configuración modal
 function openModal(index, containerId) {
   console.log("Índice recibido:", index); // Verifica el índice recibido
 
   const container = document.getElementById(containerId);
   const photos = Array.from(container.querySelectorAll("img"));
 
-  // Asegúrate de que el índice esté dentro del rango válido
   if (index >= 0 && index < photos.length) {
-    selectedIndex = index; // Asigna el índice al abrir el modal
+    selectedIndex = index;
     const photo = photos[selectedIndex];
     const imageSrc = photo.src;
     const description = photo.alt;
 
     let modal = document.getElementById("photoModal");
 
-    // Si ya existe un modal, lo eliminamos antes de crear uno nuevo
     if (modal) {
       modal.remove();
     }
@@ -187,19 +184,16 @@ function openModal(index, containerId) {
       </div>
     `;
 
-    // Añadir el modal al cuerpo del documento
     document.body.appendChild(modal);
-
-    // Asegurarse de que el modal se muestre
     modal.style.display = "block";
-    modalIsOpen = true; // Modal abierto
-    updateBackButtonState(); // Desactiva el botón back
+    modalIsOpen = true;
+    disableScroll();
+    updateBackButtonState();
   } else {
     console.error("Foto no encontrada en el índice:", index);
   }
 }
 
-// Función para mostrar foto anterior
 function prevPhoto(containerId) {
   const container = document.getElementById(containerId);
   const photos = Array.from(container.querySelectorAll("img"));
@@ -212,7 +206,6 @@ function prevPhoto(containerId) {
   document.querySelector(".modal-description").innerText = description;
 }
 
-// Función para mostrar foto siguiente
 function nextPhoto(containerId) {
   const container = document.getElementById(containerId);
   const photos = Array.from(container.querySelectorAll("img"));
@@ -225,37 +218,30 @@ function nextPhoto(containerId) {
   document.querySelector(".modal-description").innerText = description;
 }
 
-// Función para cerrar el modal
 function closeModal() {
   let modal = document.getElementById("photoModal");
   if (modal) {
     modal.style.display = "none";
-    modal.remove(); // Elimina el modal del DOM
-    modalIsOpen = false; // Modal cerrado
-    updateBackButtonState(); // Restaura el botón back
+    modal.remove();
+    modalIsOpen = false;
+    enableScroll();
+    updateBackButtonState();
   }
 }
 
-// Función para deshabilitar el botón back cuando el modal está abierto
+// Bloqueo/desbloqueo de scroll
+function disableScroll() {
+  document.body.style.overflow = "hidden";
+}
+
+function enableScroll() {
+  document.body.style.overflow = "";
+}
+
 function updateBackButtonState() {
   const backButton = document.getElementById("backButton");
-  if (modalIsOpen) {
-    backButton.disabled = true; // Desactiva el botón back
-  } else {
-    backButton.disabled = false; // Activa el botón back
-  }
+  backButton.disabled = modalIsOpen;
 }
-
-// Inicializar las fotos en cada contenedor
-document.querySelectorAll(".photo-container").forEach((container, index) => {
-  container.addEventListener("click", (e) => {
-    const images = Array.from(container.querySelectorAll("img"));
-    const clickedImageIndex = images.indexOf(e.target);
-    if (clickedImageIndex !== -1) {
-      openModal(clickedImageIndex, container.id);
-    }
-  });
-});
 
 // Configuración de Three.js
 function initThreeJS() {
