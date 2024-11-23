@@ -112,6 +112,60 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // **Interacciones de pantalla principal**
+let triggerButton = document.getElementById("triggerModalButton");
+let modal = document.getElementById("modalPropu");
+let messageText = document.getElementById("messageText");
+let yesButton = document.getElementById("yesButton");
+let noButton = document.getElementById("noButton");
+
+// Configuración para la animación de las palabras
+let message = `Esta es la verdadera razón del porque he estado un poquito extraño (No me odies JAJAJA). 
+Debido a mi cambio tú y Cris me dicen "el misterioso jajaja". La verdad he estado pensando esto desde hace un tiempo, 
+te consideró alguien muy especial en mi vida y quiero seguir teniéndote a mi lado... ¿Quieres ser mi novia?`;
+
+let intervalTime = 100; // Intervalo de tiempo en milisegundos
+
+// Mostrar el modal con el mensaje animado
+triggerButton.addEventListener("click", function () {
+  modal.style.display = "flex";
+  animateMessage(message);
+});
+
+function animateMessage(text) {
+  let i = 0;
+  messageText.innerHTML = "";
+  let interval = setInterval(function () {
+    if (i < text.length) {
+      messageText.innerHTML += text.charAt(i);
+      i++;
+    } else {
+      clearInterval(interval);
+      // Llamamos a showButtons solo después de que el mensaje termine de escribirse
+      showButtons();
+    }
+  }, intervalTime);
+}
+
+function showButtons() {
+  // Asegurarnos de que los botones solo aparezcan después de que el mensaje termine de generarse
+  yesButton.style.display = "inline-block";
+  noButton.style.display = "inline-block";
+}
+
+// Respuesta del botón Sí
+yesButton.addEventListener("click", function () {
+  messageText.innerHTML =
+    "Era obvio, suelo causar sensaciones en las personas muy difíciles de entender";
+});
+
+// Respuesta del botón No
+noButton.addEventListener("click", function () {
+  let randomX = Math.floor(Math.random() * 300) + "px";
+  let randomY = Math.floor(Math.random() * 300) + "px";
+  noButton.style.position = "absolute";
+  noButton.style.top = randomY;
+  noButton.style.left = randomX;
+});
 
 // Lista de mensajes románticos
 const messages = [

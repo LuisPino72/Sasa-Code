@@ -280,15 +280,17 @@
               Siguiente mensaje
             </button>
           </div>
+        
         </div>
-
-        <h1 class="proposal-text">¿Quieres ser mi novia?</h1>
-        <div class="button-group">
-          <button class="btn-yes" onclick="handleYes()">Sí</button>
-          <button class="btn-no" onclick="handleNo()">No</button>
-        </div>
-        <div id="confetti-container"></div>
+        <button id="triggerModalButton">Pulsa aquí</button>
+      <!-- Modal -->
+    <div id="modalPropu" class="modal">
+      <div class="modal-content">
+        <p id="messageText">Este es un mensaje inicial...</p>
+        <button id="yesButton" class="modal-button">Sí</button>
+        <button id="noButton" class="modal-button">No</button>
       </div>
+    </div>
     </section>
 
     <script src="script.js"></script>
