@@ -7,7 +7,7 @@ let isMusicPaused = false;
 // Referencia al elemento de música
 const backgroundMusic = document.getElementById("backgroundMusic");
 
-// Navegación entre pantallas
+// **Funciones de navegación entre pantallas**
 function goToSpecialMoment() {
   addToHistory("PantallaBienvenida");
   showScreen("PantallaVideo");
@@ -36,7 +36,6 @@ function showScreen(screenId) {
 
   // Controlar la reproducción del video
   const videoElement = document.getElementById("backgroundVideo");
-
   if (screenId === "PantallaVideo") {
     videoElement.play().catch((error) => {
       console.error("Error al reproducir el video:", error);
@@ -60,10 +59,9 @@ function goBack() {
   }
 }
 
-// Función para manejar la reproducción de la música de fondo
+// **Manejo de música de fondo**
 function handleBackgroundMusic(screenId) {
   const videoScreen = "PantallaVideo";
-
   if (screenId === videoScreen) {
     backgroundMusic.pause();
   } else {
@@ -77,7 +75,6 @@ function handleBackgroundMusic(screenId) {
   }
 }
 
-// Función para alternar la música de fondo (pausar o reanudar)
 function toggleMusic() {
   if (isMusicPaused) {
     backgroundMusic.play().catch((error) => {
@@ -90,7 +87,7 @@ function toggleMusic() {
   }
 }
 
-// Inicialización al cargar
+// **Inicialización al cargar la página**
 document.addEventListener("DOMContentLoaded", () => {
   showScreen("PantallaBienvenida");
   initThreeJS();
@@ -108,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", toggleMusic);
 });
 
-// Configuración para la pantalla principal
+// **Interacciones de pantalla principal**
 function handleYes() {
   showConfetti();
   alert("¡Sabía que dirías que sí! ❤️");
@@ -134,13 +131,12 @@ function showConfetti() {
   }, 5000);
 }
 
-// Función para cambiar la foto cada 3 segundos
+// **Cambio de fotos cada 5 segundos en contenedores**
 let photoContainers = document.querySelectorAll(".photo-container");
 photoContainers.forEach((container) => {
   let images = container.querySelectorAll("img");
   let currentIndex = 0;
 
-  // Cambiar foto cada 5 segundos
   setInterval(() => {
     images[currentIndex].style.display = "none";
     currentIndex = (currentIndex + 1) % images.length;
@@ -148,13 +144,11 @@ photoContainers.forEach((container) => {
   }, 5000);
 });
 
-//Configuracion modal
+// **Configuración del modal**
 let selectedIndex = null; // Inicializarlo aquí globalmente
 let modalIsOpen = false; // Variable para controlar el estado del modal
 
 function openModal(index, containerId) {
-  console.log("Índice recibido:", index); // Verifica el índice recibido
-
   const container = document.getElementById(containerId);
   const photos = Array.from(container.querySelectorAll("img"));
 
@@ -199,11 +193,7 @@ function prevPhoto(containerId) {
   const photos = Array.from(container.querySelectorAll("img"));
 
   selectedIndex = selectedIndex === 0 ? photos.length - 1 : selectedIndex - 1;
-  const imageSrc = photos[selectedIndex].src;
-  const description = photos[selectedIndex].alt;
-
-  document.querySelector("#photoModalContent img").src = imageSrc;
-  document.querySelector(".modal-description").innerText = description;
+  updateModalContent(photos);
 }
 
 function nextPhoto(containerId) {
@@ -211,6 +201,10 @@ function nextPhoto(containerId) {
   const photos = Array.from(container.querySelectorAll("img"));
 
   selectedIndex = selectedIndex === photos.length - 1 ? 0 : selectedIndex + 1;
+  updateModalContent(photos);
+}
+
+function updateModalContent(photos) {
   const imageSrc = photos[selectedIndex].src;
   const description = photos[selectedIndex].alt;
 
@@ -229,7 +223,7 @@ function closeModal() {
   }
 }
 
-// Bloqueo/desbloqueo de scroll
+// **Bloqueo/desbloqueo de scroll**
 function disableScroll() {
   document.body.style.overflow = "hidden";
 }
@@ -243,16 +237,13 @@ function updateBackButtonState() {
   backButton.disabled = modalIsOpen;
 }
 
-// Configuración de Three.js
+// **Configuración de Three.js**
 function initThreeJS() {
-  // Contenedor del canvas
   const container = document.getElementById("threejs-canvas-container");
 
-  // Configuración de la escena
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0xffe6f2); // Fondo rosado
 
-  // Configuración de la cámara
   const camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
@@ -261,69 +252,48 @@ function initThreeJS() {
   );
   camera.position.z = 5;
 
-  // Renderizador
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.appendChild(renderer.domElement);
 
-  // Luz
   const light = new THREE.PointLight(0xffffff, 1, 100);
   light.position.set(10, 10, 10);
   scene.add(light);
 
-  // Texturas de las imágenes
   const loader = new THREE.TextureLoader();
-  const petalTexture = loader.load("assets/petalo.png"); // Cambié la ruta para las texturas
+  const petalTexture = loader.load("assets/petalo.png");
   const sunflowerTexture = loader.load("assets/girasol.png");
   const roseTexture = loader.load("assets/rosa.png");
 
-  // Crear materiales con las texturas
   const petalMaterial = new THREE.SpriteMaterial({ map: petalTexture });
   const sunflowerMaterial = new THREE.SpriteMaterial({ map: sunflowerTexture });
   const roseMaterial = new THREE.SpriteMaterial({ map: roseTexture });
 
-  // Configuración del número de cada tipo de flor
-  const NUM_PETALS = 30; // Cambia este número si es necesario
-  const NUM_SUNFLOWERS = 30; // Cambia este número si es necesario
-  const NUM_ROSES = 30; // Cambia este número si es necesario
-
-  // Función para añadir sprites a la escena
   function addSprites(material, count) {
     for (let i = 0; i < count; i++) {
       const sprite = new THREE.Sprite(material);
-
-      // Posición aleatoria
       sprite.position.set(
         (Math.random() - 0.5) * 10,
         (Math.random() - 0.5) * 10,
         (Math.random() - 0.5) * 10
       );
-
-      // Tamaño aleatorio
-      const size = Math.random() * 0.5 + 0.5; // Entre 0.5 y 1
+      const size = Math.random() * 0.5 + 0.5;
       sprite.scale.set(size, size, size);
-
       scene.add(sprite);
     }
   }
 
-  // Añadir los tres tipos de flores a la escena
-  addSprites(petalMaterial, NUM_PETALS);
-  addSprites(sunflowerMaterial, NUM_SUNFLOWERS);
-  addSprites(roseMaterial, NUM_ROSES);
+  addSprites(petalMaterial, 30);
+  addSprites(sunflowerMaterial, 30);
+  addSprites(roseMaterial, 30);
 
-  // Animación
   function animate() {
     requestAnimationFrame(animate);
-
-    // Rotación lenta de la escena
     scene.rotation.y += 0.001;
-
     renderer.render(scene, camera);
   }
   animate();
 
-  // Ajustar el tamaño al cambiar el tamaño de la ventana
   window.addEventListener("resize", () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
