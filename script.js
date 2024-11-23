@@ -1,6 +1,12 @@
 // Historial de pantallas
 let screenHistory = [];
 
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    registrations.forEach((registration) => registration.unregister());
+  });
+}
+
 // Estado de la música (si está pausada o no)
 let isMusicPaused = false;
 
