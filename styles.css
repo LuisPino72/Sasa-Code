@@ -196,6 +196,48 @@ button {
   background-color: #9b1a9d;
 }
 
+/* Contenedor del corazón */
+#heartContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* No bloquea la interacción con la página */
+  overflow: hidden;
+  z-index: 9999;
+}
+
+/* Nombres dentro del corazón */
+.heart-name {
+  position: absolute;
+  font-family: "Pacifico", cursive;
+  font-size: 1.5rem;
+  color: #ff69b4; /* Rosa fuerte */
+  opacity: 0;
+  animation: fade-in-out 10s ease-in-out;
+}
+
+/* Animación para que aparezcan y desaparezcan */
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
 /* Estilos para Three.js */
 #threejs-canvas-container {
   position: absolute;
