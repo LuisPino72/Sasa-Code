@@ -106,6 +106,38 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // **Interacciones de pantalla principal**
+
+// Lista de mensajes románticos
+const messages = [
+  "Te amo más que a nada en este mundo ❤️",
+  "Cada momento contigo es un regalo 💕",
+  "Eres mi sueño hecho realidad 🌟",
+  "Juntos somos imparables 💪",
+  "Mi vida es mejor contigo a mi lado 💖",
+];
+
+// Índice del mensaje actual
+let currentMessageIndex = 0;
+
+// Referencias a los elementos HTML
+const messageElement = document.getElementById("romanticMessage");
+const nextMessageBtn = document.getElementById("nextMessageBtn");
+
+// Función para cambiar al siguiente mensaje
+function changeMessage() {
+  currentMessageIndex = (currentMessageIndex + 1) % messages.length; // Cambiar al siguiente mensaje
+  messageElement.textContent = messages[currentMessageIndex]; // Actualizar el mensaje mostrado
+}
+
+// Cambiar el mensaje automáticamente cada 20 segundos
+setInterval(changeMessage, 20000);
+
+// Cambiar el mensaje cuando el usuario presiona el botón
+nextMessageBtn.addEventListener("click", changeMessage);
+
+// Inicializar el primer mensaje
+changeMessage();
+
 function handleYes() {
   showConfetti();
   alert("¡Sabía que dirías que sí! ❤️");

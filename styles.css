@@ -322,6 +322,32 @@ section {
 }
 
 /* Pantalla principal */
+
+/* Estilos del contenedor del libro digital */
+.flipbook-container {
+  position: relative;
+  margin-top: 50px; /* Ajusta la distancia desde el top según tus necesidades */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilos para el título encima del libro */
+.flipbook-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Opcional: ajustar el iframe para que se adapte al contenedor */
+iframe {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
 .background-message {
   font-family: "Great Vibes", cursive;
   font-size: 3rem;
@@ -343,6 +369,46 @@ section {
 .button-group {
   display: flex;
   gap: 10px;
+}
+
+/* Estilo para el contenedor de mensajes románticos */
+.romantic-messages-container {
+  margin-top: 20px; /* Espacio debajo de los contenedores de fotos */
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f8f8f8; /* Fondo suave para los mensajes */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombras sutiles */
+  text-align: center;
+}
+
+/* Estilo para cada mensaje romántico */
+.romantic-message {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff4c9f;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el botón "Siguiente mensaje" */
+.next-message-btn {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #ff4c9f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.next-message-btn:hover {
+  background-color: #ff1e70; /* Color al pasar el cursor */
 }
 
 .btn-yes {

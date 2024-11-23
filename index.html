@@ -72,6 +72,19 @@
     <section id="Principal" class="hidden">
       <div class="romantic-container">
         <h1 class="background-message">"SaSa, mi más grande amor"</h1>
+        <!-- Contenedor para el libro digital -->
+        <div id="flipbook-container" class="flipbook-container">
+          <!-- Incrustar el libro de Flipbook -->
+          <iframe
+            src="https://www.flipbookpdf.net/web/site/7448fd10701ec26c5a5d35e61c26cbea0ce4564b202411.pdf.html"
+            width="500"
+            height="300"
+            frameborder="0"
+            webkitAllowFullScreen
+            mozallowfullscreen
+            allowfullscreen
+          ></iframe>
+        </div>
         <!-- Contenedores para fotos -->
         <div class="photo-containers">
           <!-- Contenedor 1 con 5 fotos -->
@@ -253,6 +266,19 @@
               />
               <!-- Más imágenes aquí -->
             </div>
+          </div>
+          <!-- Caja de mensajes románticos -->
+          <div
+            id="romanticMessagesContainer"
+            class="romantic-messages-container"
+          >
+            <div id="romanticMessage" class="romantic-message">
+              <!-- El primer mensaje se mostrará aquí -->
+              Te amo más que a nada en este mundo ❤️
+            </div>
+            <button id="nextMessageBtn" class="next-message-btn">
+              Siguiente mensaje
+            </button>
           </div>
         </div>
 
