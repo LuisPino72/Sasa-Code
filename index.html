@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>💘SaSa💘</title>
-    <link href="styles.css" rel="stylesheet" />
 
     <!-- Fuentes de Google Fonts -->
     <link
@@ -12,8 +11,14 @@
       rel="stylesheet"
     />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Favicon -->
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+
+    <!-- Estilos CSS -->
+    <link href="styles.css" rel="stylesheet" />
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   </head>
 
   <body>
@@ -27,13 +32,13 @@
 
     <!-- Botón de regreso -->
     <button id="backButton" class="hidden" onclick="goBack()">↩️</button>
+
     <!-- Botón para pausar/reanudar la música de fondo -->
     <button id="toggleMusicButton" class="toggle-music-button">🎵</button>
 
     <!-- Pantalla 1: Bienvenida -->
     <section id="PantallaBienvenida">
       <div id="threejs-canvas-container"></div>
-      <!-- Aquí se mostrará el lienzo de Three.js -->
       <div class="content">
         <h1>Bienvenida, Sarais</h1>
         <p>
@@ -72,9 +77,9 @@
     <section id="Principal" class="hidden">
       <div class="romantic-container">
         <h1 class="background-message">"SaSa, mi más grande amor"</h1>
+
         <!-- Contenedor para el libro digital -->
         <div id="flipbook-container" class="flipbook-container">
-          <!-- Incrustar el libro de Flipbook -->
           <iframe
             src="https://www.flipbookpdf.net/web/site/7448fd10701ec26c5a5d35e61c26cbea0ce4564b202411.pdf.html"
             width="400"
@@ -85,6 +90,7 @@
             allowfullscreen
           ></iframe>
         </div>
+
         <!-- Contenedores para fotos -->
         <div class="photo-containers">
           <!-- Contenedor 1 con 5 fotos -->
@@ -267,39 +273,38 @@
               <!-- Más imágenes aquí -->
             </div>
           </div>
-          <!-- Caja de mensajes románticos -->
-          <div
-            id="romanticMessagesContainer"
-            class="romantic-messages-container"
-          >
-            <div id="romanticMessage" class="romantic-message">
-              <!-- El primer mensaje se mostrará aquí -->
-              Te amo más que a nada en este mundo ❤️
-            </div>
-            <button id="nextMessageBtn" class="next-message-btn">
-              Siguiente mensaje
-            </button>
+
+        <!-- Caja de mensajes románticos -->
+        <div id="romanticMessagesContainer" class="romantic-messages-container">
+          <div id="romanticMessage" class="romantic-message">
+            Te amo más que a nada en este mundo ❤️
           </div>
+          <button id="nextMessageBtn" class="next-message-btn">
+            Siguiente mensaje
+          </button>
         </div>
-        <button id="triggerModalButton">Pulsa aquí</button>
-        <!-- Modal -->
-        <div id="modalPropu" class="modal">
-          <div class="modal-content">
-            <p id="messageText">Este es un mensaje inicial...</p>
-            <button id="yesButton" class="modal-button" style="display: none">
-              Sí
-            </button>
-            <button id="noButton" class="modal-button" style="display: none">
-              No
-            </button>
-            <button id="closeButton" class="modal-button" style="display: none">
-              Cerrar
-            </button>
-          </div>
+      </div>
+
+      <button id="triggerModalButton">Pulsa aquí</button>
+
+      <!-- Modal -->
+      <div id="modalPropu" class="modal">
+        <div class="modal-content">
+          <p id="messageText">Este es un mensaje inicial...</p>
+          <button id="yesButton" class="modal-button" style="display: none">
+            Sí
+          </button>
+          <button id="noButton" class="modal-button" style="display: none">
+            No
+          </button>
+          <button id="closeButton" class="modal-button" style="display: none">
+            Cerrar
+          </button>
         </div>
       </div>
     </section>
 
+    <!-- Scripts -->
     <script src="script.js"></script>
   </body>
 </html>
