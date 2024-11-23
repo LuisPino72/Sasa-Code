@@ -112,11 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // **Interacciones de pantalla principal**
+// **Interacciones de pantalla principal**
 let triggerButton = document.getElementById("triggerModalButton");
 let modal = document.getElementById("modalPropu");
 let messageText = document.getElementById("messageText");
 let yesButton = document.getElementById("yesButton");
 let noButton = document.getElementById("noButton");
+let closeButton = document.getElementById("closeButton");
 
 // Configuración para la animación de las palabras
 let message = `Esta es la verdadera razón del porque he estado un poquito extraño (No me odies JAJAJA). 
@@ -156,6 +158,9 @@ function showButtons() {
 yesButton.addEventListener("click", function () {
   messageText.innerHTML =
     "Era obvio, suelo causar sensaciones en las personas muy difíciles de entender";
+  // Ocultar el botón Sí y mostrar el botón Cerrar
+  yesButton.style.display = "none";
+  closeButton.style.display = "inline-block";
 });
 
 // Respuesta del botón No
@@ -165,6 +170,11 @@ noButton.addEventListener("click", function () {
   noButton.style.position = "absolute";
   noButton.style.top = randomY;
   noButton.style.left = randomX;
+});
+
+// Cerrar el modal cuando se haga clic en "Cerrar"
+closeButton.addEventListener("click", function () {
+  modal.style.display = "none";
 });
 
 // Lista de mensajes románticos
